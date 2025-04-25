@@ -1,0 +1,18 @@
+apiVersion: automation.cloudbees.io/v1alpha1
+kind: workflow
+name: Release Workflow demo sprint63
+on:
+ workflow_dispatch:
+   inputs:
+     manifest:
+       type: string
+jobs:
+ test:
+   steps:
+   - id: test
+     name: test
+     uses: docker://alpine/curl:latest
+     run: |
+       echo "Manifest is: $MANIFEST"
+     env:
+       MANIFEST:  "${{ inputs.manifest }}"
